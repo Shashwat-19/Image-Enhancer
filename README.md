@@ -31,16 +31,18 @@
 
 ### 🎛️ Comprehensive Enhancement Controls
 
-| Category | Controls | Engine |
-|---|---|---|
-| **Light & Tone** | Brightness, Contrast, Highlights, Shadows | Pillow + NumPy |
+| Category             | Controls                                          | Engine          |
+| -------------------- | ------------------------------------------------- | --------------- |
+| **Light & Tone**     | Brightness, Contrast, Highlights, Shadows         | Pillow + NumPy  |
 | **Detail & Texture** | Sharpness, Detail (Unsharp Mask), Noise Reduction | Pillow + OpenCV |
-| **Color** | Saturation, Warmth / Coolness | Pillow + NumPy |
-| **Effects** | Vignette (Radial Gradient Overlay) | NumPy |
-| **Transform** | Rotate Left/Right, Flip Horizontal/Vertical | Pillow |
+| **Color**            | Saturation, Warmth / Coolness                     | Pillow + NumPy  |
+| **Effects**          | Vignette (Radial Gradient Overlay)                | NumPy           |
+| **Transform**        | Rotate Left/Right, Flip Horizontal/Vertical       | Pillow          |
 
 ### ✦ Auto Enhance
+
 AI-powered image analysis that measures:
+
 - **Mean brightness** (luminance average)
 - **Contrast proxy** (standard deviation of luminance)
 - **Color cast detection** (RGB channel dominance → warm / cool / neutral)
@@ -48,10 +50,12 @@ AI-powered image analysis that measures:
 Automatically applies optimal corrections based on the analysis.
 
 ### 🎨 9 Curated Presets
+
 One-click professional looks:
 **Vivid** · **Portrait** · **Night Fix** · **Cinematic** · **B&W** · **Warm** · **Cool** · **Airy** · **Moody**
 
 ### 🖥️ Premium Dark UI
+
 - **Dark theme** — deep charcoal (`#0b0c0f`) with layered surfaces
 - **Typography** — Syne for headings, DM Mono for values and labels
 - **Accent palette** — mint green (`#6ee7b7`) primary, blue (`#3b82f6`) secondary
@@ -62,25 +66,27 @@ One-click professional looks:
 - **Toast notifications** for success/error feedback
 
 ### 📦 Export
+
 Download enhanced images in **PNG**, **JPEG**, or **WEBP** with adjustable quality.
 
 ---
 
 ## Tech Stack
 
-| Layer | Technology | Purpose |
-|---|---|---|
-| **Backend** | Flask | REST API server |
-| **Image Processing** | Pillow (PIL) | Brightness, contrast, saturation, sharpness |
-| **Advanced Processing** | OpenCV (cv2) | Unsharp mask, noise reduction |
-| **Pixel Operations** | NumPy | Warmth, highlights/shadows, vignette |
-| **Frontend** | Vanilla JS + CSS | Zero-dependency, premium dark UI |
+| Layer                   | Technology       | Purpose                                     |
+| ----------------------- | ---------------- | ------------------------------------------- |
+| **Backend**             | Flask            | REST API server                             |
+| **Image Processing**    | Pillow (PIL)     | Brightness, contrast, saturation, sharpness |
+| **Advanced Processing** | OpenCV (cv2)     | Unsharp mask, noise reduction               |
+| **Pixel Operations**    | NumPy            | Warmth, highlights/shadows, vignette        |
+| **Frontend**            | Vanilla JS + CSS | Zero-dependency, premium dark UI            |
 
 ---
 
 ## Getting Started
 
 ### Prerequisites
+
 - Python 3.10+
 - pip
 
@@ -129,9 +135,11 @@ image_enhancer/
 ## API Reference
 
 ### `POST /enhance`
+
 Process an image with specified parameters.
 
 **Request:**
+
 ```json
 {
   "image": "data:image/png;base64,...",
@@ -152,6 +160,7 @@ Process an image with specified parameters.
 ```
 
 **Response:**
+
 ```json
 {
   "image": "data:image/png;base64,..."
@@ -161,9 +170,11 @@ Process an image with specified parameters.
 ---
 
 ### `POST /auto_enhance`
+
 Analyze image properties and apply automatic corrections.
 
 **Request:**
+
 ```json
 {
   "image": "data:image/png;base64,..."
@@ -171,6 +182,7 @@ Analyze image properties and apply automatic corrections.
 ```
 
 **Response:**
+
 ```json
 {
   "image": "data:image/png;base64,...",
@@ -196,9 +208,11 @@ Analyze image properties and apply automatic corrections.
 ---
 
 ### `POST /download`
+
 Download the processed image as a file.
 
 **Request:**
+
 ```json
 {
   "image": "data:image/png;base64,...",
@@ -213,9 +227,11 @@ Download the processed image as a file.
 ---
 
 ### `GET /presets`
+
 Returns all available preset configurations.
 
 **Response:**
+
 ```json
 {
   "Vivid": { "brightness": 5, "contrast": 20, "saturation": 35, ... },
@@ -228,18 +244,18 @@ Returns all available preset configurations.
 
 ## Slider Parameter Ranges
 
-| Parameter | Min | Max | Default |
-|---|---|---|---|
-| Brightness | -100 | 100 | 0 |
-| Contrast | -100 | 100 | 0 |
-| Highlights | -100 | 100 | 0 |
-| Shadows | -100 | 100 | 0 |
-| Saturation | -100 | 100 | 0 |
-| Warmth | -100 | 100 | 0 |
-| Sharpness | 0 | 100 | 0 |
-| Detail | 0 | 100 | 0 |
-| Noise Reduction | 0 | 100 | 0 |
-| Vignette | 0 | 100 | 0 |
+| Parameter       | Min  | Max | Default |
+| --------------- | ---- | --- | ------- |
+| Brightness      | -100 | 100 | 0       |
+| Contrast        | -100 | 100 | 0       |
+| Highlights      | -100 | 100 | 0       |
+| Shadows         | -100 | 100 | 0       |
+| Saturation      | -100 | 100 | 0       |
+| Warmth          | -100 | 100 | 0       |
+| Sharpness       | 0    | 100 | 0       |
+| Detail          | 0    | 100 | 0       |
+| Noise Reduction | 0    | 100 | 0       |
+| Vignette        | 0    | 100 | 0       |
 
 ---
 
@@ -281,29 +297,29 @@ Returns all available preset configurations.
 
 ## Presets
 
-| Preset | Style | Key Adjustments |
-|---|---|---|
-| **Vivid** | Vibrant, punchy | ↑ Saturation +35, ↑ Contrast +20 |
-| **Portrait** | Soft, flattering | ↑ Warmth +10, Vignette +20, NR +15 |
-| **Night Fix** | Low-light recovery | ↑ Brightness +30, ↑ Shadows +35, NR +40 |
-| **Cinematic** | Film-like mood | ↑ Contrast +25, ↓ Saturation -10, Vignette +35 |
-| **B&W** | Classic monochrome | Saturation -100, ↑ Contrast +30 |
-| **Warm** | Golden tones | ↑ Warmth +35, ↑ Saturation +15 |
-| **Cool** | Blue-tinted | ↓ Warmth -30, ↑ Contrast +10 |
-| **Airy** | Light, ethereal | ↑ Brightness +20, ↓ Contrast -10 |
-| **Moody** | Dark, dramatic | ↓ Brightness -15, Vignette +40, ↓ Saturation -15 |
+| Preset        | Style              | Key Adjustments                                  |
+| ------------- | ------------------ | ------------------------------------------------ |
+| **Vivid**     | Vibrant, punchy    | ↑ Saturation +35, ↑ Contrast +20                 |
+| **Portrait**  | Soft, flattering   | ↑ Warmth +10, Vignette +20, NR +15               |
+| **Night Fix** | Low-light recovery | ↑ Brightness +30, ↑ Shadows +35, NR +40          |
+| **Cinematic** | Film-like mood     | ↑ Contrast +25, ↓ Saturation -10, Vignette +35   |
+| **B&W**       | Classic monochrome | Saturation -100, ↑ Contrast +30                  |
+| **Warm**      | Golden tones       | ↑ Warmth +35, ↑ Saturation +15                   |
+| **Cool**      | Blue-tinted        | ↓ Warmth -30, ↑ Contrast +10                     |
+| **Airy**      | Light, ethereal    | ↑ Brightness +20, ↓ Contrast -10                 |
+| **Moody**     | Dark, dramatic     | ↓ Brightness -15, Vignette +40, ↓ Saturation -15 |
 
 ---
 
 ## Supported Formats
 
 | Format | Upload | Export |
-|---|---|---|
-| PNG | ✅ | ✅ |
-| JPEG | ✅ | ✅ |
-| WEBP | ✅ | ✅ |
-| BMP | ✅ | — |
-| TIFF | ✅ | — |
+| ------ | ------ | ------ |
+| PNG    | ✅     | ✅     |
+| JPEG   | ✅     | ✅     |
+| WEBP   | ✅     | ✅     |
+| BMP    | ✅     | —      |
+| TIFF   | ✅     | —      |
 
 Max file size: **16 MB**
 
@@ -321,10 +337,11 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ---
 
-## Author
+## 📚 Documentation
 
-**Shashwat**
-- GitHub: [@Shashwat-19](https://github.com/Shashwat-19)
+Comprehensive documentation for this project is available on [Hashnode](https://hashnode.com/@Shashwat56).
+
+> At present, this README serves as the primary source of documentation.
 
 ---
 
@@ -334,6 +351,29 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 ---
 
-<p align="center">
-  Built with ❤️ using Flask, Pillow, OpenCV & NumPy
-</p>
+## 📩 Contact
+
+### Shashwat
+
+**Java Developer | Cloud & NoSQL Enthusiast**
+
+🔹 **Java** – OOP, Backend Systems, APIs, Automation  
+🔹 **Cloud & NoSQL** – Docker, AWS, MongoDB, Firebase Firestore  
+🔹 **UI/UX Design** – Scalable, user-focused, and visually engaging apps
+
+---
+
+## 🚀 Open Source | Tech Innovation
+
+Building robust applications and leveraging cloud technologies for high-performance solutions.
+
+---
+
+### 📌 Find me here:
+
+[<img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" />](https://github.com/Shashwat-19) [<img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" />](https://www.linkedin.com/in/shashwatk1956/) [<img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" />](mailto:shashwat1956@gmail.com) [<img src="https://img.shields.io/badge/Hashnode-2962FF?style=for-the-badge&logo=hashnode&logoColor=white" />](https://hashnode.com/@Shashwat56)
+[<img src="https://img.shields.io/badge/HackerRank-15%2B-2EC866?style=for-the-badge&logo=HackerRank&logoColor=white" />](https://www.hackerrank.com/profile/shashwat1956)
+
+Feel free to connect for tech collaborations, open-source contributions, or brainstorming innovative solutions!
+
+> Built using Flask, Pillow, OpenCV & NumPy
