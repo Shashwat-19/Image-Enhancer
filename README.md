@@ -353,13 +353,14 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 ## 📩 Contact
 
-### Shashwat
+## Shashwat
 
-**Java Developer | Cloud & NoSQL Enthusiast**
+**Machine Learning Engineer | Scalable AI Systems**
 
-🔹 **Java** – OOP, Backend Systems, APIs, Automation  
-🔹 **Cloud & NoSQL** – Docker, AWS, MongoDB, Firebase Firestore  
-🔹 **UI/UX Design** – Scalable, user-focused, and visually engaging apps
+- ML systems (CV, NLP) + data pipelines
+- End-to-end: training → deployment
+- Backend & Cloud: Python, Flask, Node.js, Docker, AWS
+- Projects: Traffic AI, Video Summarizer, AI Assistants
 
 ---
 
