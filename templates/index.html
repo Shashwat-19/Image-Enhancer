@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Image Enhancer Pro — Professional image editing with AI-powered enhancements">
+    <title>Image Enhancer Pro</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<!-- ── Header ─────────────────────────────────────────── -->
+<header class="header">
+    <div class="header-left">
+        <div class="logo">
+            <div class="logo-icon">✦</div>
+            <span>Enhancer Pro</span>
+        </div>
+        <span class="tech-badge">Flask · Pillow · OpenCV · NumPy</span>
+    </div>
+    <div class="header-right">
+        <button class="btn btn-ghost btn-sm" id="btn-new-image">
+            <span>+</span> New Image
+        </button>
+    </div>
+</header>
+
+<!-- ── Editor ─────────────────────────────────────────── -->
+<div class="editor">
+
+    <!-- ── Main Canvas Area ───────────────────────────── -->
+    <div class="editor-main">
+
+        <!-- Toolbar -->
+        <div class="toolbar">
+            <div class="toolbar-group">
+                <button class="btn btn-ghost btn-sm btn-icon view-btn active" data-view="split" title="Split View">⬒</button>
+                <button class="btn btn-ghost btn-sm btn-icon view-btn" data-view="before" title="Before Only">◧</button>
+                <button class="btn btn-ghost btn-sm btn-icon view-btn" data-view="after" title="After Only">◨</button>
+            </div>
+
+            <div class="toolbar-divider"></div>
+
+            <div class="toolbar-group">
+                <button class="btn btn-ghost btn-sm btn-icon" id="btn-rotate-l" title="Rotate Left">↺</button>
+                <button class="btn btn-ghost btn-sm btn-icon" id="btn-rotate-r" title="Rotate Right">↻</button>
+                <button class="btn btn-ghost btn-sm btn-icon" id="btn-flip-h" title="Flip Horizontal">⇔</button>
+                <button class="btn btn-ghost btn-sm btn-icon" id="btn-flip-v" title="Flip Vertical">⇕</button>
+            </div>
+        </div>
+
+        <!-- Canvas -->
+        <div class="canvas-area" id="canvas-area">
+
+            <!-- Upload Zone -->
+            <div class="upload-zone" id="upload-zone">
+                <div class="upload-icon">⬆</div>
+                <div class="upload-text">
+                    <h3>Drop an image here</h3>
+                    <p>or click to browse · PNG, JPEG, WEBP, BMP, TIFF · up to 16 MB</p>
+                </div>
+                <input type="file" class="upload-input" id="upload-input"
+                       accept="image/png,image/jpeg,image/webp,image/bmp,image/tiff">
+            </div>
+
+            <!-- Original Panel -->
+            <div class="canvas-panel" id="panel-original">
+                <div class="canvas-label">Original</div>
+                <div class="canvas-image-wrap">
+                    <img id="img-original" alt="Original image">
+                </div>
+            </div>
+
+            <!-- Enhanced Panel -->
+            <div class="canvas-panel" id="panel-enhanced">
+                <div class="canvas-label">Enhanced</div>
+                <div class="canvas-image-wrap">
+                    <img id="img-enhanced" alt="Enhanced image">
+                    <div class="loading-overlay" id="loading-overlay">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ── Sidebar ────────────────────────────────────── -->
+    <aside class="sidebar disabled" id="sidebar">
+        <div class="sidebar-scroll">
+
+            <!-- Presets -->
+            <div class="sidebar-section">
+                <div class="section-title">Presets</div>
+                <div class="preset-grid">
+                    <button class="preset-btn" data-preset="Vivid">Vivid</button>
+                    <button class="preset-btn" data-preset="Portrait">Portrait</button>
+                    <button class="preset-btn" data-preset="Night Fix">Night Fix</button>
+                    <button class="preset-btn" data-preset="Cinematic">Cinematic</button>
+                    <button class="preset-btn" data-preset="B&W">B&W</button>
+                    <button class="preset-btn" data-preset="Warm">Warm</button>
+                    <button class="preset-btn" data-preset="Cool">Cool</button>
+                    <button class="preset-btn" data-preset="Airy">Airy</button>
+                    <button class="preset-btn" data-preset="Moody">Moody</button>
+                </div>
+            </div>
+
+            <!-- Light & Tone -->
+            <div class="sidebar-section">
+                <div class="section-title">Light & Tone</div>
+
+                <div class="slider-control">
+                    <div class="slider-header">
+                        <span class="slider-label">Brightness</span>
+                        <span class="slider-value">0</span>
+                    </div>
+                    <input type="range" class="slider-track" data-param="brightness"
+                           min="-100" max="100" value="0">
+                </div>
+
+                <div class="slider-control">
+                    <div class="slider-header">
+                        <span class="slider-label">Contrast</span>
+                        <span class="slider-value">0</span>
+                    </div>
+                    <input type="range" class="slider-track" data-param="contrast"
+                           min="-100" max="100" value="0">
+                </div>
+
+                <div class="slider-control">
+                    <div class="slider-header">
+                        <span class="slider-label">Highlights</span>
+                        <span class="slider-value">0</span>
+                    </div>
+                    <input type="range" class="slider-track" data-param="highlights"
+                           min="-100" max="100" value="0">
+                </div>
+
+                <div class="slider-control">
+                    <div class="slider-header">
+                        <span class="slider-label">Shadows</span>
+                        <span class="slider-value">0</span>
+                    </div>
+                    <input type="range" class="slider-track" data-param="shadows"
+                           min="-100" max="100" value="0">
+                </div>
+            </div>
+
+            <!-- Detail & Texture -->
+            <div class="sidebar-section">
+                <div class="section-title">Detail & Texture</div>
+
+                <div class="slider-control">
+                    <div class="slider-header">
+                        <span class="slider-label">Sharpness</span>
+                        <span class="slider-value">0</span>
+                    </div>
+                    <input type="range" class="slider-track" data-param="sharpness"
+                           min="0" max="100" value="0">
+                </div>
+
+                <div class="slider-control">
+                    <div class="slider-header">
+                        <span class="slider-label">Detail</span>
+                        <span class="slider-value">0</span>
+                    </div>
+                    <input type="range" class="slider-track" data-param="detail"
+                           min="0" max="100" value="0">
+                </div>
+
+                <div class="slider-control">
+                    <div class="slider-header">
+                        <span class="slider-label">Noise Reduction</span>
+                        <span class="slider-value">0</span>
+                    </div>
+                    <input type="range" class="slider-track" data-param="noiseReduction"
+                           min="0" max="100" value="0">
+                </div>
+            </div>
+
+            <!-- Color -->
+            <div class="sidebar-section">
+                <div class="section-title">Color</div>
+
+                <div class="slider-control">
+                    <div class="slider-header">
+                        <span class="slider-label">Saturation</span>
+                        <span class="slider-value">0</span>
+                    </div>
+                    <input type="range" class="slider-track" data-param="saturation"
+                           min="-100" max="100" value="0">
+                </div>
+
+                <div class="slider-control">
+                    <div class="slider-header">
+                        <span class="slider-label">Warmth</span>
+                        <span class="slider-value">0</span>
+                    </div>
+                    <input type="range" class="slider-track" data-param="warmth"
+                           min="-100" max="100" value="0">
+                </div>
+            </div>
+
+            <!-- Effects -->
+            <div class="sidebar-section">
+                <div class="section-title">Effects</div>
+
+                <div class="slider-control">
+                    <div class="slider-header">
+                        <span class="slider-label">Vignette</span>
+                        <span class="slider-value">0</span>
+                    </div>
+                    <input type="range" class="slider-track" data-param="vignette"
+                           min="0" max="100" value="0">
+                </div>
+            </div>
+
+            <!-- Auto Enhance Stats -->
+            <div class="sidebar-section">
+                <div class="section-title">Analysis</div>
+                <div class="auto-stats" id="auto-stats">
+                    <div class="stat-row">
+                        <span class="stat-label">Brightness</span>
+                        <span class="stat-value" id="stat-brightness">—</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Contrast</span>
+                        <span class="stat-value" id="stat-contrast">—</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Tone</span>
+                        <span class="stat-value" id="stat-tone">—</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Export -->
+            <div class="sidebar-section">
+                <div class="section-title">Export</div>
+                <div class="export-row">
+                    <select class="export-select" id="export-format">
+                        <option value="PNG">PNG</option>
+                        <option value="JPEG">JPEG</option>
+                        <option value="WEBP">WEBP</option>
+                    </select>
+                    <input type="number" class="export-input" id="export-quality"
+                           value="95" min="1" max="100" placeholder="Quality">
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer Actions -->
+        <div class="sidebar-footer">
+            <div class="footer-row">
+                <button class="btn btn-secondary" id="btn-auto-enhance">
+                    ✦ Auto Enhance
+                </button>
+                <button class="btn btn-ghost" id="btn-reset">
+                    Reset All
+                </button>
+            </div>
+            <button class="btn btn-primary" id="btn-download" style="width:100%;justify-content:center;">
+                ↓ Download
+            </button>
+        </div>
+    </aside>
+
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toast-container"></div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
