@@ -25,5 +25,5 @@ EXPOSE 8080
 ENV PYTHONUNBUFFERED=1
 ENV FLASK_APP=app.py
 
-# Run the application using Gunicorn for production
-CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "2", "--timeout", "120", "app:app"]
+# Run the application using Gunicorn for production and print the local URL
+CMD ["sh", "-c", "echo '\\n=========================================\\n🚀 App is running!\\n👉 Click to open: http://127.0.0.1:8080\\n=========================================\\n' && exec gunicorn --bind 0.0.0.0:8080 --workers 2 --timeout 120 app:app"]
