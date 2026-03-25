@@ -371,10 +371,10 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 **Machine Learning Engineer | Scalable AI Systems**
 
-- ML systems (CV, NLP) + data pipelines
-- End-to-end: training → deployment
-- Backend & Cloud: Python, Flask, Node.js, Docker, AWS
-- Projects: Traffic AI, Video Summarizer, AI Assistants
+🔹 **ML systems:** (CV, NLP) + data pipelines<br>
+🔹 **End-to-end:** training → deployment<br>
+🔹 **Backend & Cloud:** Python, Flask, Node.js, Docker, AWS<br>
+🔹 **Projects:** Traffic AI, Video Summarizer, AI Assistants<br>
 
 ---
 
