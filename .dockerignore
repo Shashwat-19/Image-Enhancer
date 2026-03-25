@@ -1,0 +1,29 @@
+# Virtual environments
+venv/
+env/
+.venv/
+.env
+
+# Cache
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Git
+.git/
+.gitignore
+
+# Deployment
+vercel.json
+.vercel/
+
+# Docker
+Dockerfile
+.dockerignore
+
+# IDEs and OS files
+.vscode/
+.idea/
+.DS_Store
+*.swp

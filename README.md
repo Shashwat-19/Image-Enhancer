@@ -90,7 +90,7 @@ Download enhanced images in **PNG**, **JPEG**, or **WEBP** with adjustable quali
 - Python 3.10+
 - pip
 
-### Installation
+### Installation (Local)
 
 ```bash
 # Clone the repository
@@ -102,6 +102,20 @@ pip install -r requirements.txt
 
 # Start the server
 python3 app.py
+```
+
+### Installation (Docker)
+
+```bash
+# Clone the repository
+git clone https://github.com/Shashwat-19/Image-Enhancer.git
+cd Image-Enhancer
+
+# Build the Docker image
+docker build -t image-enhancer-pro .
+
+# Run the container wrapper
+docker run -p 8080:8080 image-enhancer-pro
 ```
 
 Open **http://127.0.0.1:8080** in your browser.
